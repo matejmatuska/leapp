@@ -261,11 +261,15 @@ class Command(object):
             for alias in aliases:
                 if alias.startswith('--'):
                     names.append('--' + alias.strip('-'))
-                else:
+                elif alias.startswith('-'):
                     alias = alias.strip('-')
                     if len(alias) != 1:
                         raise CommandDefinitionError("Short name should be one letter only")
-                    names.append('-' + alias)
+                    names.append('-' + alias.strip('-'))
+                else:
+                    # no way to distinguish whether it's a short or long option if leading dashes,
+                    # let's just add it as it is, will be treated
+                    names.append(alias)
         if not action:
             action = 'store'
             if is_flag:
