@@ -268,8 +268,11 @@ class Command(object):
                     names.append('-' + alias.strip('-'))
                 else:
                     # no way to distinguish whether it's a short or long option if leading dashes,
-                    # let's just add it as it is, will be treated
-                    names.append(alias)
+                    # decide based on length
+                    if len(alias) == 1:
+                        names.append('-' + alias)
+                    else:
+                        names.append('--' + alias)
         if not action:
             action = 'store'
             if is_flag:
