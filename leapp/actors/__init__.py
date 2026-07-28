@@ -384,7 +384,7 @@ class Actor(object):
 
     def retrieve_config(self):
         """
-        Retrieve the configuration described by self.config_schema.
+        Retrieve the configuration described by self.config_schemas.
 
         :return: Dictionary containing requested configuration.
         :rtype: dict
